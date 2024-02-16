@@ -2,6 +2,7 @@
 # mutect_mito_somatic.R
 # workflow for processing IonTorrent mitochondrial sequencing data for somatic mutection detection
 
+# Last updated: 12/3/2023
 
 ## FUNCTIONAL DEFINITIONS
 is.between <- function(x, a, b) {
@@ -344,12 +345,23 @@ sampleHSD$Polymorphisms[match("L-C52", sampleHSD$ID)] <- gsub("8248.1G", "", sam
 sampleHSD$Polymorphisms[match("L-K27", sampleHSD$ID)] <- gsub("3912.1C", "", sampleHSD$Polymorphisms[match("L-K27", sampleHSD$ID)])
 sampleHSD$Polymorphisms[match("L-K37", sampleHSD$ID)] <- gsub("3912.1C", "", sampleHSD$Polymorphisms[match("L-K37", sampleHSD$ID)])
 sampleHSD$Polymorphisms[match("L-K9NT", sampleHSD$ID)] <- gsub("3912.1C", "", sampleHSD$Polymorphisms[match("L-K9NT", sampleHSD$ID)])
-sampleHSD$Polymorphisms <- gsub("9308GT", "9308G", sampleHSD$Polymorphisms)
+#sampleHSD$Polymorphisms <- gsub("9308GT", "9308G", sampleHSD$Polymorphisms)
 # 12/27/22
 sampleHSD$Polymorphisms <- gsub("14667GT", "14667G\t14668T", sampleHSD$Polymorphisms)
 sampleHSD$Polymorphisms <- gsub("6293CT", "", sampleHSD$Polymorphisms)
 sampleHSD$Polymorphisms <- gsub("8989AC", "8989A", sampleHSD$Polymorphisms)
 sampleHSD$Polymorphisms <- gsub("\t+", "\t", sampleHSD$Polymorphisms)
+
+# 11/24/23 (update, batch 2)
+sampleHSD$Polymorphisms <- gsub("12704CT", "12705T", sampleHSD$Polymorphisms) # O-C5_haplogrep2_input.hsd
+sampleHSD$Polymorphisms <- gsub("14693GC", "14693G", sampleHSD$Polymorphisms) # C-C3_haplogrep2_input.hsd
+sampleHSD$Polymorphisms <- gsub("15301AC", "15301A", sampleHSD$Polymorphisms) # C-C15_haplogrep2_input.hsd
+sampleHSD$Polymorphisms <- gsub("15325GG", "15325G", sampleHSD$Polymorphisms) # O-C3_haplogrep2_input.hsd
+sampleHSD$Polymorphisms <- gsub("16319AA", "16319A", sampleHSD$Polymorphisms) # O-C2_haplogrep2_input.hsd
+sampleHSD$Polymorphisms <- gsub("16362CC", "16362C", sampleHSD$Polymorphisms) # C-C17_haplogrep2_input.hsd
+sampleHSD$Polymorphisms <- gsub("7853AT", "7853A", sampleHSD$Polymorphisms) # K-C5_haplogrep2_input.hsd
+sampleHSD$Polymorphisms <- gsub("12705TT", "12705T", sampleHSD$Polymorphisms) # O-C5_haplogrep2_input.hsd
+
 
 ## Haplogrep, second pass
 haplogrepRun2_input <- paste(sampleHSD$ID, "_haplogrep2_input.hsd", sep = "")
